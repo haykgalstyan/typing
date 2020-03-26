@@ -1,6 +1,3 @@
-# Release keystore and secrets
-key/release/
-
 # Local configuration file (sdk path, etc)
 local.properties
 
