@@ -1,7 +1,7 @@
 package galstyan.hayk.typing.app
 
 import android.app.Application
-import galstyan.hayk.typing.AppContainer
+import galstyan.hayk.typing.di.AppContainer
 
 
 class App : Application() {

@@ -8,17 +8,18 @@ import galstyan.hayk.typing.ui.main.MainFragment
 
 
 class AppActivity : AppCompatActivity() {
+	private val appContainer = (application as App).appContainer
+	private val fragmentFactory = FragmentFactoryImpl(appContainer)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+	override fun onCreate(savedInstanceState: Bundle?) {
+		supportFragmentManager.fragmentFactory = fragmentFactory
+		super.onCreate(savedInstanceState)
 
-        val appContainer = (application as App).appContainer
+		val layout = FrameLayout(this)
+		layout.id = View.generateViewId()
+		setContentView(layout)
 
-        val layout = FrameLayout(this)
-        layout.id = View.generateViewId()
-        setContentView(layout)
-
-        val navigation = NavigationImpl(supportFragmentManager, layout.id, null)
-        navigation.replace(MainFragment.newInstance())
-    }
+		val navigation = NavigationImpl(supportFragmentManager, layout.id, null)
+		navigation.replace(MainFragment(appContainer))
+	}
 }
