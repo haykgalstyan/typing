@@ -8,10 +8,12 @@ import galstyan.hayk.typing.ui.main.MainFragment
 
 
 class AppActivity : AppCompatActivity() {
-	private val appContainer = (application as App).appContainer
-	private val fragmentFactory = FragmentFactoryImpl(appContainer)
+
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+		val appContainer = (application as App?)!!.appContainer
+		val fragmentFactory = FragmentFactoryImpl(appContainer)
+
 		supportFragmentManager.fragmentFactory = fragmentFactory
 		super.onCreate(savedInstanceState)
 

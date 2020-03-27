@@ -4,7 +4,7 @@ import galstyan.hayk.typing.repository.TextRepository
 
 
 class TextRepositoryMockImpl : TextRepository() {
-
+	// todo: provide some local texts from db if not connected
 	override suspend fun getText() =
 		"""
             This picture is a colorized scanning electron micrograph of Ebola virus particles (green),
