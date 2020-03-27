@@ -5,9 +5,6 @@ import androidx.fragment.app.FragmentFactory
 import galstyan.hayk.typing.di.AppContainer
 
 
-/**
- * Passes DI Container into fragments
- */
 class FragmentFactoryImpl(private val appContainer: AppContainer) : FragmentFactory() {
 
 	override fun instantiate(classLoader: ClassLoader, className: String): Fragment {

@@ -12,9 +12,10 @@ class AppActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		val appContainer = (application as App?)!!.appContainer
-		val fragmentFactory = FragmentFactoryImpl(appContainer)
 
+		val fragmentFactory = FragmentFactoryImpl(appContainer)
 		supportFragmentManager.fragmentFactory = fragmentFactory
+
 		super.onCreate(savedInstanceState)
 
 		val layout = FrameLayout(this)

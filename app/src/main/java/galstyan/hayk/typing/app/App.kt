@@ -1,25 +1,14 @@
 package galstyan.hayk.typing.app
 
 import android.app.Application
-import galstyan.hayk.typing.di.AppContainer
 import galstyan.hayk.typing.repository.TextRepository
 
 
 class App : Application() {
 
-
-	val appContainer: AppContainer by lazy {
-		AppContainerImpl(
-			mapOf(
-				TextRepository::class.java to TextRepositoryMockImpl()
-			)
+	val appContainer = AppContainerImpl(
+		repositories = mapOf(
+			TextRepository::class.java to TextMockRepositoryImpl()
 		)
-	}
-
-
-	override fun onCreate() {
-		super.onCreate()
-
-
-	}
+	)
 }
