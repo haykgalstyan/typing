@@ -3,12 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="@dimen/screen_padding"
     tools:context=".ui.main.MainFragment">
 
+
     <TextView
-        android:id="@+id/out"
+        android:id="@+id/output"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:textSize="@dimen/text_medium"
+        tools:text="Bla bla blablabla blabbla" />
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@null" />
 
 </FrameLayout>

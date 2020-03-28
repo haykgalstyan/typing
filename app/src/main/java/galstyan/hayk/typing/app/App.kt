@@ -9,6 +9,7 @@ class App : Application() {
 	val appContainer = AppContainerImpl(
 		repositories = mapOf(
 			TextRepository::class.java to TextMockRepositoryImpl()
-		)
+		),
+		textMatcherFactory = TextMatcherFactoryImpl()
 	)
 }

@@ -4,4 +4,4 @@ import androidx.lifecycle.ViewModel
 import galstyan.hayk.typing.di.AppContainer
 
 
-abstract class AppViewModel(appContainer: AppContainer) : ViewModel()
+abstract class AppViewModel(protected val appContainer: AppContainer) : ViewModel()
