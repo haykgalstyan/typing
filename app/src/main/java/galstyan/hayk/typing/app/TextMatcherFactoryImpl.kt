@@ -6,7 +6,7 @@ import galstyan.hayk.typing.model.TextMatcherFactory
 
 class TextMatcherFactoryImpl : TextMatcherFactory {
 
-	override fun create(text: String): TextMatcher {
+	override fun create(text: CharSequence): TextMatcher {
 		return TextMatcherImpl(text)
 	}
 }

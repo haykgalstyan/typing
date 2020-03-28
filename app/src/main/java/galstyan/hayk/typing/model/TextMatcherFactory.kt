@@ -3,5 +3,5 @@ package galstyan.hayk.typing.model
 
 interface TextMatcherFactory {
 
-	fun create(text: String): TextMatcher
+	fun create(text: CharSequence): TextMatcher
 }
