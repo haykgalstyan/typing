@@ -19,7 +19,6 @@ import galstyan.hayk.typing.di.AppContainer
 import galstyan.hayk.typing.model.TextMatcher
 import galstyan.hayk.typing.ui.AppBaseFragment
 import galstyan.hayk.typing.ui.AppViewModelFactory
-import galstyan.hayk.typing.ui.OnInputListener
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
