@@ -1,2 +1,2 @@
-# typing
+# Typing
 Typing game for android
