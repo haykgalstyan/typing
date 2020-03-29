@@ -7,13 +7,21 @@ class FinishTimer(millisToFinish: Long) {
 
 	private val timer = InternalTimer(millisToFinish)
 
-	init {
-		timer.start()
-	}
 
 	interface TimerListener {
 		fun onTick(millisUntilFinished: Long)
 		fun onFinish()
+	}
+
+
+	fun start() {
+		timer.start()
+	}
+
+
+	fun stopGetTimeLeft(): Long {
+		dispose()
+		return timer.millisToFinish
 	}
 
 
@@ -42,12 +50,12 @@ class FinishTimer(millisToFinish: Long) {
 		}
 
 		override fun onFinish() {
-			_listener?.onFinish();
+			_listener?.onFinish()
 		}
 
 		override fun onTick(millisUntilFinished: Long) {
-			millisToFinish = millisUntilFinished;
-			_listener?.onTick(millisUntilFinished);
+			millisToFinish = millisUntilFinished / 1000 * 1000 // normalize
+			_listener?.onTick(millisToFinish)
 		}
 	}
 }

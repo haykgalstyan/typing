@@ -2,8 +2,7 @@ package galstyan.hayk.typing.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import galstyan.hayk.typing.di.AppContainer
-import java.security.Provider
+import galstyan.hayk.typing.model.AppContainer
 
 
 class AppViewModelFactory(

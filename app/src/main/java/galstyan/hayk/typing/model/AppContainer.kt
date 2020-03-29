@@ -1,9 +1,11 @@
-package galstyan.hayk.typing.di
+package galstyan.hayk.typing.model
 
-import galstyan.hayk.typing.model.TextMatcher
 import galstyan.hayk.typing.repository.Repository
 
 
+/**
+ * Container for domain layer dependencies
+ */
 interface AppContainer {
 
 	/**

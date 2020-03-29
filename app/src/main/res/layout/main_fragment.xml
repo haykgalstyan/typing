@@ -8,19 +8,40 @@
     android:padding="@dimen/screen_padding"
     tools:context=".ui.main.MainFragment">
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_extra_large"
-        tools:text="1:00" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_recent_history"
+            tools:ignore="ContentDescription" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_extra_large"
+            tools:text="1:00" />
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/output"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
         android:textSize="@dimen/text_medium"
         tools:text="Bla bla blablabla blabbla" />
 

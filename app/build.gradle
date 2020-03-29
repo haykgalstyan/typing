@@ -41,6 +41,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.2.3'
 
     // Test
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -52,4 +53,8 @@ dependencies {
     def versionLifecycle = '2.2.0'
     implementation "androidx.lifecycle:lifecycle-extensions:$versionLifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versionLifecycle"
+
+    // Some random, fast to integrate DB
+    // Not really a problem since its an implementation details in this architecture
+    implementation 'io.paperdb:paperdb:2.6'
 }

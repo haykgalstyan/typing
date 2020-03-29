@@ -1,6 +1,6 @@
 package galstyan.hayk.typing.app
 
-import galstyan.hayk.typing.di.AppContainer
+import galstyan.hayk.typing.model.AppContainer
 import galstyan.hayk.typing.model.TextMatcher
 import galstyan.hayk.typing.model.TextMatcherFactory
 import galstyan.hayk.typing.repository.Repository

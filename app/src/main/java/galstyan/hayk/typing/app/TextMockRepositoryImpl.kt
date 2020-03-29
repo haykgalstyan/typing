@@ -5,13 +5,13 @@ import galstyan.hayk.typing.repository.TextRepository
 
 class TextMockRepositoryImpl : TextRepository() {
 
-	override suspend fun getText() =
-		"""
-            This picture is a colorized scanning electron micrograph of Ebola virus particles (green),
-            visible both as extracellular particles and budding particles from a chronically infected
-            African green monkey kidney cell (blue), at 20,000× magnification.
-            This image was taken in a biosafety level 4 facility, the highest level of biosafety precautions,
-            which is used for easily transmissible agents that cause severe to fatal disease in
-            humans for which there are no available vaccines or treatments.
-        """.trimIndent()
+	private val texts = listOf(
+		"Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text",
+		"All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary",
+		"The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested",
+		"If you are going to use a passage of Lorem Ipsum you need to be sure there isn't anything embarrassing hidden in the middle of text",
+		"Contrary to popular belief, Lorem Ipsum is not simply random text"
+	)
+
+	override suspend fun getText() = texts.random()
 }
