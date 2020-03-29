@@ -8,44 +8,46 @@ import galstyan.hayk.typing.ui.navigation.OnNavigationListener
 
 
 class NavigationImpl(
-    private val fragmentManager: FragmentManager,
-    private val containerViewId: Int,
-    private val listener: OnNavigationListener?
+	private val fragmentManager: FragmentManager,
+	private val containerViewId: Int,
+	private val listener: OnNavigationListener?
 ) : Navigation {
 
-    private val uiHandler: Handler = Handler()
+	private val uiHandler: Handler = Handler()
 
-    init {
-        if (listener != null) fragmentManager.addOnBackStackChangedListener { notifyListener() }
-    }
-
-
-    override fun replace(fragment: Fragment) {
-        fragmentManager
-            .beginTransaction()
-            .replace(containerViewId, fragment)
-            .commit()
-
-        uiHandler.post { notifyListener() }
-    }
+	init {
+		if (listener != null) fragmentManager.addOnBackStackChangedListener { notifyListener() }
+	}
 
 
-    override fun push(fragment: Fragment) {
-        fragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .replace(containerViewId, fragment)
-            .commit()
-    }
+	override fun replace(fragment: Fragment) {
+		fragmentManager
+			.beginTransaction()
+			.replace(containerViewId, fragment)
+			.commit()
+
+		uiHandler.post { notifyListener() }
+	}
 
 
-    override fun pop() = fragmentManager.popBackStack()
+	override fun push(fragment: Fragment) {
+		fragmentManager
+			.beginTransaction()
+			.addToBackStack(null)
+			.replace(containerViewId, fragment)
+			.commit()
+	}
 
 
-    override fun peek(): Fragment? = fragmentManager.findFragmentById(containerViewId)
+	override fun pop() = fragmentManager.popBackStack()
 
 
-    private fun notifyListener() {
-        listener?.onNavigation()
-    }
+	override fun peek(): Fragment? {
+		return fragmentManager.fragments.lastOrNull()
+	}
+
+
+	private fun notifyListener() {
+		listener?.onNavigation()
+	}
 }

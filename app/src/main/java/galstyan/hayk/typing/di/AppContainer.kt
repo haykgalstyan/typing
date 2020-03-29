@@ -18,4 +18,10 @@ interface AppContainer {
 	 */
 	fun textMatcherOf(text: String): TextMatcher
 
+
+	/**
+	 * Get time in milliseconds to finish typing
+	 */
+	fun getTimeToFinish(): Long
+
 }

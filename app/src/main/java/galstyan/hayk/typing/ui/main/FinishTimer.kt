@@ -3,29 +3,51 @@ package galstyan.hayk.typing.ui.main
 import android.os.CountDownTimer
 
 
-class FinishTimer(
-	private var millisToFinish: Long
-) : CountDownTimer(millisToFinish, 1000) {
+class FinishTimer(millisToFinish: Long) {
 
-	private var _listener: TimerListener? = null
+	private val timer = InternalTimer(millisToFinish)
 
+	init {
+		timer.start()
+	}
 
 	interface TimerListener {
 		fun onTick(millisUntilFinished: Long)
 		fun onFinish()
 	}
 
-	fun setListener(listener: TimerListener): FinishTimer {
-		_listener = listener
-		return this
+
+	fun setListener(listener: TimerListener) {
+		timer.setListener(listener)
 	}
 
-	override fun onFinish() {
-		_listener?.onFinish();
+
+	fun dispose() {
+		timer.setListener(null)
+		timer.cancel()
 	}
 
-	override fun onTick(millisUntilFinished: Long) {
-		millisToFinish = millisUntilFinished;
-		_listener?.onTick(millisUntilFinished);
+
+	/**
+	 * Why use composition over inheritance?
+	 * Changing behaviour/encapsulating without violating LSP
+	 */
+	private class InternalTimer(
+		var millisToFinish: Long
+	) : CountDownTimer(millisToFinish, 1000) {
+		private var _listener: TimerListener? = null
+
+		fun setListener(listener: TimerListener?) {
+			_listener = listener
+		}
+
+		override fun onFinish() {
+			_listener?.onFinish();
+		}
+
+		override fun onTick(millisUntilFinished: Long) {
+			millisToFinish = millisUntilFinished;
+			_listener?.onTick(millisUntilFinished);
+		}
 	}
 }
