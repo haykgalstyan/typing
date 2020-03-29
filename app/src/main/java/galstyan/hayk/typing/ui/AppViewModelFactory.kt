@@ -3,7 +3,6 @@ package galstyan.hayk.typing.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import galstyan.hayk.typing.di.AppContainer
-import java.lang.IllegalArgumentException
 
 
 class AppViewModelFactory(private val appContainer: AppContainer) : ViewModelProvider.Factory {

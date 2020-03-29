@@ -5,3 +5,6 @@ import galstyan.hayk.typing.di.AppContainer
 
 
 abstract class AppBaseFragment(protected val appContainer: AppContainer) : Fragment()
+
+
+

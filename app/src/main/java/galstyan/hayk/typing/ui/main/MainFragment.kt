@@ -1,6 +1,5 @@
 package galstyan.hayk.typing.ui.main
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.CharacterStyle
@@ -9,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,13 +16,24 @@ import galstyan.hayk.typing.di.AppContainer
 import galstyan.hayk.typing.model.TextMatcher
 import galstyan.hayk.typing.ui.AppBaseFragment
 import galstyan.hayk.typing.ui.AppViewModelFactory
+import galstyan.hayk.typing.ui.getColor
 import kotlinx.android.synthetic.main.main_fragment.*
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
+import java.util.*
 
 
 class MainFragment(appContainer: AppContainer) : AppBaseFragment(appContainer) {
 
+	private val timeToFinishMillis = 1000L * 30
+	private val timeFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
 
-	private val viewModel: MainViewModel by lazy {
+	private val progressStyle by lazy { ForegroundColorSpan(getColor(R.color.colorAccent)) }
+	private val errorStyle by lazy { ForegroundColorSpan(getColor(R.color.colorError)) }
+
+	private val viewModel by lazy {
 		ViewModelProvider(this, AppViewModelFactory(appContainer)).get(MainViewModel::class.java)
 	}
 
@@ -40,38 +48,48 @@ class MainFragment(appContainer: AppContainer) : AppBaseFragment(appContainer) {
 
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
 		input.requestFocus()
-
-		viewModel.loadNewText()
-		viewModel.textObservable.observe(viewLifecycleOwner, Observer {
-			setNewText(view.context, it.text, it.matcher)
+		viewModel.loadNewText(timeToFinishMillis)
+		viewModel.textObservable.observe(viewLifecycleOwner, Observer { (text, matcher, timer) ->
+			onNewText(text, timer, onTextChanged = { s ->
+				onTextChanged(s, matcher)
+			})
 		})
 	}
 
 
-	private fun setNewText(context: Context, text: String, matcher: TextMatcher) {
-		output.setText(text, TextView.BufferType.SPANNABLE)
-		val progressSpan = createColorSpan(context, R.color.colorAccent)
-		val errorSpan = createColorSpan(context, R.color.colorError)
+	private fun onNewText(
+		text: String,
+		timer: FinishTimer,
+		onTextChanged: (s: CharSequence) -> Unit
+	) {
 
-		input.doOnTextChanged { s, _, _, _ ->
-			run {
-				val matchIndex = matcher.match(s!!)
-				applySpan(s, errorSpan, start = matchIndex)
-				applySpan(output.text, progressSpan, end = matchIndex)
+		time.setTextColor(getColor(R.color.colorPrimary))
+		timer.setListener(object : FinishTimer.TimerListener {
+			override fun onTick(millisUntilFinished: Long) {
+				time.text = timeFormat.format(millisUntilFinished)
 			}
-		}
+
+			override fun onFinish() {
+				time.setTextColor(getColor(R.color.colorError))
+			}
+		}).start()
+
+		output.setText(text, TextView.BufferType.SPANNABLE)
+		input.doOnTextChanged { s, _, _, _ -> onTextChanged(s ?: "") }
 	}
 
 
-	private fun createColorSpan(context: Context, @ColorRes colorRes: Int): CharacterStyle =
-		ForegroundColorSpan(ContextCompat.getColor(context, colorRes))
+	private fun onTextChanged(inputText: CharSequence, matcher: TextMatcher) {
+		val matchIndex = matcher.match(inputText)
+		applyStyleSpan(inputText, errorStyle, start = matchIndex)
+		applyStyleSpan(output.text, progressStyle, end = matchIndex)
+	}
 
 
-	private fun applySpan(
+	private fun applyStyleSpan(
 		chars: CharSequence?,
-		span: Any,
+		span: CharacterStyle,
 		start: Int = 0,
 		end: Int = chars?.length ?: 0
 	) {
