@@ -72,11 +72,17 @@ class MainFragment(appContainer: AppContainer) : AppBaseFragment(appContainer) {
 
 			override fun onFinish() {
 				time.setTextColor(getColor(R.color.colorError))
+				showStats()
 			}
 		}).start()
 
 		output.setText(text, TextView.BufferType.SPANNABLE)
 		input.doOnTextChanged { s, _, _, _ -> onTextChanged(s ?: "") }
+	}
+
+
+	private fun showStats() {
+		// todo
 	}
 
 
