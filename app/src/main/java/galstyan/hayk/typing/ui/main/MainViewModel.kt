@@ -51,7 +51,7 @@ class MainViewModel(appContainer: AppContainer) : AppViewModel(appContainer) {
 	}
 
 
-	fun getHistory(): MutableLiveData<List<TypingResult>> {
+	fun getHistory(): LiveData<List<TypingResult>> {
 		val callback = MutableLiveData<List<TypingResult>>()
 		viewModelScope.launch {
 			callback.value = repoHistory.getResultList()
