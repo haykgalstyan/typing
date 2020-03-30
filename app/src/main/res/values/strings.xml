@@ -8,7 +8,7 @@
         <item>Oops! Quite didn\'t make it.</item>
     </string-array>
 
-    <string name="result_stats_head_body">
+    <string name="result_stats_body">
         Your completion percentage is: %1$d\nYour WPM is: %2$.1f\n
     </string>
 

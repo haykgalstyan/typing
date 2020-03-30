@@ -68,7 +68,7 @@ class HistoryFragment : DialogFragment() {
 				val result = list[position]
 				val percentage = percentageAnalyzer.analyze(result)
 				val wpm = wpmAnalyzer.analyze(result)
-				val body = getString(R.string.result_stats_head_body, percentage, wpm)
+				val body = getString(R.string.result_stats_body, percentage, wpm)
 				holder.label.text = body
 			}
 

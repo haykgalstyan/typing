@@ -97,7 +97,7 @@ class MainFragment(viewModelFactory: ViewModelProvider.Factory) :
 		val percentage = percentageAnalyzer.analyze(result)
 		val wpm = wpmAnalyzer.analyze(result)
 
-		val body = getString(R.string.result_stats_head_body, percentage, wpm)
+		val body = getString(R.string.result_stats_body, percentage, wpm)
 		val head = resources.getStringArray(R.array.result_stats_head)[0]
 
 		AlertDialog.Builder(context).apply {
